@@ -11,15 +11,14 @@
 
   <style>
     :root {
-      --bg-cream: #eaddcf;
+      --bg-cream: #f4ede6;
       --burgundy-main: #58111a;
-      --burgundy-light: #6e1823;
-      --burgundy-side: #480e15;
+      --burgundy-light: #7a1d28;
       --burgundy-dark: #32070c;
       --gold: #d4af37;
       --gold-light: #f3e5ab;
       --gold-dark: #a37c27;
-      --paper: #fbf9f5;
+      --rose-accent: #d8a7b1;
     }
 
     * {
@@ -31,33 +30,33 @@
     body {
       background-color: var(--bg-cream);
       background-image: 
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5) 0%, rgba(215, 200, 180, 0.4) 100%);
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.7) 0%, rgba(225, 210, 195, 0.5) 100%);
       font-family: 'Montserrat', sans-serif;
       color: #333;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 40px 15px;
+      justify-content: center;
+      padding: 30px 15px;
     }
 
     .wrapper {
       position: relative;
       width: 100%;
-      max-width: 550px;
+      max-width: 620px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Indication bilingue */
+    /* Indication bilingue haut */
     .click-hint {
       color: var(--burgundy-main);
       font-family: 'Cinzel', serif;
       font-size: 13px;
       letter-spacing: 1.5px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       text-transform: uppercase;
       text-align: center;
       animation: pulse 2s infinite;
@@ -65,100 +64,42 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      transition: opacity 0.5s ease;
     }
 
     .click-hint .hint-ar {
       font-family: 'Amiri', serif;
-      font-size: 18px;
+      font-size: 19px;
       letter-spacing: 0;
       text-transform: none;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.75; transform: scale(1); }
+      0%, 100% { opacity: 0.8; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.03); }
     }
 
-    /* Conteneur Enveloppe */
-    .envelope-container {
+    /* ---------------- ENVELOPPE ---------------- */
+    .envelope-box {
       position: relative;
       width: 350px;
       height: 250px;
-      perspective: 1200px;
-      transition: all 0.8s ease-in-out;
+      background: var(--burgundy-dark);
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     @media (min-width: 480px) {
-      .envelope-container {
+      .envelope-box {
         width: 460px;
         height: 310px;
       }
     }
 
-    /* Enveloppe Bordeaux */
-    .envelope {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: var(--burgundy-dark);
-      border-radius: 6px;
-      box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.4),
-        inset 0 0 15px rgba(0,0,0,0.6);
-    }
-
-    .envelope::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--burgundy-dark);
-      z-index: 1;
-      border-radius: 6px;
-    }
-
-    /* Côtés de l'enveloppe */
-    .side-flap-left {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 175px solid var(--burgundy-side);
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid transparent;
-      z-index: 2;
-    }
-
-    .side-flap-right {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-right: 175px solid var(--burgundy-side);
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid transparent;
-      z-index: 2;
-    }
-
-    @media (min-width: 480px) {
-      .side-flap-left {
-        border-left-width: 230px;
-        border-top-width: 155px;
-        border-bottom-width: 155px;
-      }
-      .side-flap-right {
-        border-right-width: 230px;
-        border-top-width: 155px;
-        border-bottom-width: 155px;
-      }
-    }
-
-    /* Rabat Supérieur */
-    .flap {
+    /* Rabats enveloppe */
+    .env-flap-top {
       position: absolute;
       top: 0;
       left: 0;
@@ -166,45 +107,38 @@
       height: 0;
       border-left: 175px solid transparent;
       border-right: 175px solid transparent;
-      border-top: 140px solid var(--burgundy-main);
+      border-top: 135px solid var(--burgundy-main);
+      z-index: 4;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+      transition: transform 0.6s ease;
       transform-origin: top;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, z-index 0.2s ease 0.3s;
-      z-index: 5;
-      filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5));
     }
 
-    @media (min-width: 480px) {
-      .flap {
-        border-left-width: 230px;
-        border-right-width: 230px;
-        border-top-width: 170px;
-      }
-    }
-
-    /* Bismillah */
-    .bismillah-envelope {
+    .env-flap-left {
       position: absolute;
-      top: -125px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Amiri', serif;
-      font-size: 17px;
-      color: var(--gold-light);
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-      white-space: nowrap;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 175px solid #450b12;
+      border-top: 125px solid transparent;
+      border-bottom: 125px solid transparent;
+      z-index: 2;
     }
 
-    @media (min-width: 480px) {
-      .bismillah-envelope {
-        top: -150px;
-        font-size: 20px;
-      }
+    .env-flap-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-right: 175px solid #450b12;
+      border-top: 125px solid transparent;
+      border-bottom: 125px solid transparent;
+      z-index: 2;
     }
 
-    /* Poche du bas */
-    .pocket {
+    .env-flap-bottom {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -212,238 +146,257 @@
       height: 0;
       border-left: 175px solid transparent;
       border-right: 175px solid transparent;
-      border-bottom: 135px solid #3c090e;
+      border-bottom: 130px solid #36070c;
       z-index: 3;
-      border-radius: 0 0 6px 6px;
     }
 
     @media (min-width: 480px) {
-      .pocket {
-        border-left-width: 230px;
-        border-right-width: 230px;
-        border-bottom-width: 165px;
-      }
+      .env-flap-top { border-left-width: 230px; border-right-width: 230px; border-top-width: 170px; }
+      .env-flap-left { border-left-width: 230px; border-top-width: 155px; border-bottom-width: 155px; }
+      .env-flap-right { border-right-width: 230px; border-top-width: 155px; border-bottom-width: 155px; }
+      .env-flap-bottom { border-left-width: 230px; border-right-width: 230px; border-bottom-width: 165px; }
     }
 
-    /* Sceau M & D */
+    .bismillah-text {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 480px) {
+      .bismillah-text { top: -145px; font-size: 20px; }
+    }
+
+    /* Sceau de Cire */
     .wax-seal {
       position: absolute;
       top: 115px;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle at 30% 30%, #fadb73 0%, #c49927 50%, #7a5a0f 100%);
+      width: 62px;
+      height: 62px;
+      background: radial-gradient(circle at 35% 35%, #fce788 0%, #c49927 50%, #7a5a0f 100%);
       border-radius: 50%;
-      z-index: 6;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      box-shadow: 
-        0 6px 15px rgba(0,0,0,0.6), 
-        inset 0 0 8px rgba(255,255,255,0.8),
-        inset -3px -3px 8px rgba(0,0,0,0.5);
-      border: 3px solid rgba(212, 175, 55, 0.7);
-      transition: all 0.4s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 0 8px rgba(255,255,255,0.8);
+      border: 2px solid var(--gold);
     }
 
     @media (min-width: 480px) {
-      .wax-seal {
-        top: 140px;
-        width: 68px;
-        height: 68px;
-      }
-    }
-
-    .wax-seal:hover {
-      transform: translateX(-50%) scale(1.08);
+      .wax-seal { top: 140px; width: 70px; height: 70px; }
     }
 
     .seal-inner {
       width: 82%;
       height: 82%;
       border-radius: 50%;
-      border: 1px dashed #523c08;
+      border: 1px dashed #4a3707;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       color: #3b2a04;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.4);
+      font-size: 15px;
     }
 
-    /* Conteneur de la Lettre */
-    .letter-wrapper {
-      position: absolute;
-      top: 10px;
-      left: 3%;
-      width: 94%;
-      z-index: 2;
+    /* ---------------- CARTE D'INVITATION (STYLE FLORAL) ---------------- */
+    .invitation-card {
+      display: none;
+      width: 100%;
+      max-width: 580px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 35px 25px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
       opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, opacity 0.5s ease 0.3s, visibility 0.8s;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .letter-folded {
-      background: var(--paper);
-      border-radius: 6px;
+    /* Arche géométrique dorée & Fleurs CSS/SVG */
+    .card-border-frame {
       border: 1px solid var(--gold);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      padding: 30px 18px;
-      text-align: center;
+      padding: 30px 20px;
+      position: relative;
+      border-radius: 6px;
     }
 
-    /* Animation d'ouverture complète */
-    .envelope-container.open .flap {
-      transform: rotateX(180deg);
-      z-index: 1;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s ease 0.2s;
-    }
-
-    .envelope-container.open .bismillah-envelope,
-    .envelope-container.open .wax-seal {
-      opacity: 0;
+    /* Coins de l'arche géométrique */
+    .card-border-frame::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
       pointer-events: none;
     }
 
-    /* La lettre sort complètement et passe au premier plan */
-    .envelope-container.open .letter-wrapper {
-      opacity: 1;
-      visibility: visible;
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      transform: translateY(0);
-      z-index: 100;
-      margin-bottom: 30px;
-    }
-
-    /* L'enveloppe se rétracte et s'affiche sous la lettre */
-    .envelope-container.open {
-      height: auto;
-      background: transparent;
-      box-shadow: none;
-    }
-
-    .envelope-container.open .envelope {
-      transform: translateY(20px) scale(0.95);
+    /* Décorations Florales aux coins (SVG) */
+    .floral-decor {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      pointer-events: none;
       opacity: 0.85;
     }
 
-    /* Design Intérieur Carte */
-    .card-frame {
-      border: 1px solid var(--gold-dark);
-      padding: 20px 12px;
-      position: relative;
+    .floral-top-left {
+      top: -10px;
+      left: -10px;
     }
 
+    .floral-bottom-right {
+      bottom: -10px;
+      right: -10px;
+      transform: rotate(180deg);
+    }
+
+    /* Modificateurs d'ouverture */
+    .wrapper.open .envelope-box {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+      height: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .wrapper.open .invitation-card {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Contenu de la Carte */
     .quran-verse {
       font-family: 'Amiri', serif;
-      font-size: 19px;
+      font-size: 20px;
       color: var(--burgundy-main);
       line-height: 1.9;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       direction: rtl;
+      text-align: center;
       font-weight: bold;
     }
 
-    .parents-header {
+    .parents-text {
       font-family: 'Cinzel', serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold-dark);
-      margin-bottom: 8px;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .invite-sentence {
+      font-size: 12px;
+      color: #666;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     .couple-names {
-      margin: 15px 0;
+      text-align: center;
+      margin: 20px 0;
     }
 
     .name-french {
       font-family: 'Alex Brush', cursive;
-      font-size: 42px;
+      font-size: 52px;
       color: var(--burgundy-main);
-      line-height: 1.1;
+      line-height: 1;
     }
 
     .name-arabic {
       font-family: 'Amiri', serif;
-      font-size: 26px;
+      font-size: 28px;
       color: var(--gold-dark);
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .invitation-text {
-      font-size: 12px;
-      color: #444;
-      line-height: 1.6;
-      margin: 15px 0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+      text-align: center;
+      margin: 20px 0;
     }
 
-    .event-details-box {
-      background-color: rgba(212, 175, 55, 0.08);
+    .event-box {
+      background: rgba(212, 175, 55, 0.06);
       border-top: 1px solid var(--gold);
       border-bottom: 1px solid var(--gold);
-      padding: 14px;
-      margin: 18px 0;
+      padding: 18px;
+      text-align: center;
+      margin: 25px 0;
     }
 
-    .date-highlight {
+    .date-title {
       font-family: 'Cinzel', serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--burgundy-main);
+      letter-spacing: 1px;
     }
 
-    .time-highlight {
-      font-size: 12px;
+    .time-title {
+      font-size: 13px;
       color: var(--gold-dark);
-      margin-top: 4px;
+      margin-top: 5px;
       font-weight: 600;
     }
 
-    .venue-title {
+    .venue-name {
       font-family: 'Cinzel', serif;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--burgundy-main);
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
-    .venue-address {
-      font-size: 11px;
-      color: #555;
+    .venue-city {
+      font-size: 12px;
+      color: #666;
       margin-top: 2px;
     }
 
     .map-section {
-      margin-top: 20px;
-      border-radius: 6px;
+      margin-top: 25px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--gold);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    .map-section h4 {
+    .map-header {
       font-family: 'Cinzel', serif;
       background: var(--burgundy-main);
       color: var(--gold-light);
-      padding: 7px;
-      font-size: 11px;
+      padding: 10px;
+      font-size: 12px;
+      text-align: center;
       letter-spacing: 1px;
     }
 
     .map-container {
-      position: relative;
       width: 100%;
-      height: 210px;
+      height: 230px;
     }
 
     .map-container iframe {
@@ -456,26 +409,26 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 22px;
+      margin-top: 25px;
     }
 
     .btn {
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px;
+      padding: 14px;
       background: linear-gradient(135deg, var(--burgundy-main) 0%, var(--burgundy-dark) 100%);
       color: var(--gold-light);
       text-decoration: none;
       border-radius: 30px;
       border: 1px solid var(--gold);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(88, 17, 26, 0.25);
       transition: all 0.3s ease;
     }
 
     .btn-fr {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -483,12 +436,14 @@
 
     .btn-ar {
       font-family: 'Amiri', serif;
-      font-size: 14px;
+      font-size: 15px;
       margin-top: 2px;
       color: var(--gold-light);
     }
 
     .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 17, 26, 0.35);
       background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
       color: var(--burgundy-dark);
     }
@@ -498,8 +453,9 @@
     }
 
     .footer-note {
-      margin-top: 20px;
-      font-size: 11px;
+      text-align: center;
+      margin-top: 25px;
+      font-size: 12px;
       color: #777;
       font-style: italic;
     }
@@ -507,107 +463,112 @@
 </head>
 <body>
 
-  <div class="wrapper">
+  <div class="wrapper" id="mainWrapper">
     
-    <!-- Traduction fluide Arabe / Français -->
+    <!-- En-tête / Indication -->
     <div class="click-hint" id="clickHint">
       <span class="hint-ar">✨ افتح هنا ✨</span>
       <span>Cliquez sur le sceau pour ouvrir</span>
     </div>
 
-    <div class="envelope-container" id="envelopeContainer">
+    <!-- 1. L'ENVELOPPE INITIALE -->
+    <div class="envelope-box" onclick="openEnvelope()">
+      <div class="env-flap-left"></div>
+      <div class="env-flap-right"></div>
+      <div class="env-flap-top">
+        <div class="bismillah-text">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+      </div>
+      <div class="env-flap-bottom"></div>
       
-      <!-- Lettre qui se déploie entièrement -->
-      <div class="letter-wrapper">
-        <div class="letter-folded">
-          <div class="card-frame">
-            
-            <!-- Verset en Arabe -->
-            <div class="quran-verse">
-              « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
-            </div>
+      <div class="wax-seal">
+        <div class="seal-inner">M & D</div>
+      </div>
+    </div>
 
-            <div class="parents-header">
-              Ensemble avec leurs familles
-            </div>
+    <!-- 2. LA CARTE D'INVITATION SEULE ET COMPLÈTE -->
+    <div class="invitation-card" id="invitationCard">
+      
+      <div class="card-border-frame">
+        
+        <!-- Illustration Florale en SVG Aquarelle -->
+        <svg class="floral-decor floral-top-left" viewBox="0 0 100 100" fill="none">
+          <path d="M10 10 Q 50 10 70 40 Q 30 50 10 10 Z" fill="#d8a7b1" opacity="0.6"/>
+          <path d="M5 20 Q 40 30 50 70 Q 20 60 5 20 Z" fill="#7a1d28" opacity="0.4"/>
+          <circle cx="30" cy="30" r="12" fill="#58111a" opacity="0.7"/>
+          <circle cx="45" cy="20" r="8" fill="#d4af37" opacity="0.8"/>
+          <path d="M0 0 L100 0 L0 100 Z" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+        </svg>
 
-            <p style="font-size: 11px; color: #666; font-style: italic;">ont l'honneur de vous inviter au mariage de</p>
+        <svg class="floral-decor floral-bottom-right" viewBox="0 0 100 100" fill="none">
+          <path d="M10 10 Q 50 10 70 40 Q 30 50 10 10 Z" fill="#d8a7b1" opacity="0.6"/>
+          <path d="M5 20 Q 40 30 50 70 Q 20 60 5 20 Z" fill="#7a1d28" opacity="0.4"/>
+          <circle cx="30" cy="30" r="12" fill="#58111a" opacity="0.7"/>
+          <circle cx="45" cy="20" r="8" fill="#d4af37" opacity="0.8"/>
+          <path d="M0 0 L100 0 L0 100 Z" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+        </svg>
 
-            <div class="couple-names">
-              <div class="name-french">Meryem & Driss</div>
-              <div class="name-arabic">مريم و إدريس</div>
-            </div>
+        <!-- Verset Coranique -->
+        <div class="quran-verse">
+          « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
+        </div>
 
-            <div class="invitation-text">
-              Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
-            </div>
+        <div class="parents-text">Ensemble avec leurs familles</div>
+        <div class="invite-sentence">ont l'honneur de vous inviter au mariage de</div>
 
-            <div class="event-details-box">
-              <div class="date-highlight">VENDREDI 25 DÉCEMBRE 2026</div>
-              <div class="time-highlight">À PARTIR DE 20H00</div>
-              
-              <div class="venue-title">SALLE DES FÊTES ECLAIRE WEDDING & EVENTS</div>
-              <div class="venue-address">Salé, Maroc</div>
-            </div>
+        <!-- Noms des Mariés -->
+        <div class="couple-names">
+          <div class="name-french">Meryem & Driss</div>
+          <div class="name-arabic">مريم و إدريس</div>
+        </div>
 
-            <!-- Carte Google Maps -->
-            <div class="map-section">
-              <h4>📍 Localisation / موقع القاعة</h4>
-              <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-              </div>
-            </div>
+        <div class="invitation-text">
+          Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
+        </div>
 
-            <!-- Boutons Traduits -->
-            <div class="actions">
-              <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
-                <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
-                <span class="btn-ar">فتح موقع القاعة</span>
-              </a>
-              <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
-                <span class="btn-fr">💌 Confirmer ma présence (RSVP)</span>
-                <span class="btn-ar">تأكيد الحضور</span>
-              </a>
-            </div>
+        <!-- Date & Lieu -->
+        <div class="event-box">
+          <div class="date-title">VENDREDI 25 DÉCEMBRE 2026</div>
+          <div class="time-title">À PARTIR DE 20H00</div>
+          
+          <div class="venue-name">SALLE DES FÊTES ECLAIRE WEDDING & EVENTS</div>
+          <div class="venue-city">Salé, Maroc</div>
+        </div>
 
-            <div class="footer-note">
-              Au plaisir de vous compter parmi nous ✨
-            </div>
-
+        <!-- Localisation GPS / Map -->
+        <div class="map-section">
+          <div class="map-header">📍 Localisation / موقع القاعة</div>
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
         </div>
-      </div>
 
-      <!-- Enveloppe -->
-      <div class="envelope">
-        
-        <!-- Côtés bordeaux -->
-        <div class="side-flap-left"></div>
-        <div class="side-flap-right"></div>
-
-        <!-- Rabat Supérieur -->
-        <div class="flap">
-          <div class="bismillah-envelope">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+        <!-- Boutons d'Action -->
+        <div class="actions">
+          <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
+            <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
+            <span class="btn-ar">فتح موقع القاعة</span>
+          </a>
+          <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
+            <span class="btn-fr">💌 Confirmer ma présence (RSVP)</span>
+            <span class="btn-ar">تأكيد الحضور</span>
+          </a>
         </div>
 
-        <!-- Sceau de cire M & D -->
-        <div class="wax-seal" onclick="openEnvelope()">
-          <div class="seal-inner">M & D</div>
+        <div class="footer-note">
+          Au plaisir de vous compter parmi nous ✨
         </div>
 
-        <div class="pocket"></div>
-
       </div>
-
     </div>
+
   </div>
 
   <script>
     function openEnvelope() {
-      const container = document.getElementById('envelopeContainer');
+      const wrapper = document.getElementById('mainWrapper');
       const hint = document.getElementById('clickHint');
       
-      container.classList.add('open');
+      wrapper.classList.add('open');
       hint.innerHTML = "<span class='hint-ar'>مرحبا بكم في زفاف مريم وإدريس</span><span>✨ Bienvenue au Mariage de Meryem & Driss ✨</span>";
     }
   </script>
