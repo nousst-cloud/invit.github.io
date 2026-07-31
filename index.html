@@ -208,7 +208,7 @@
       font-size: 15px;
     }
 
-    /* ---------------- CARTE D'INVITATION (STYLE FLORAL) ---------------- */
+    /* ---------------- CARTE D'INVITATION ---------------- */
     .invitation-card {
       display: none;
       width: 100%;
@@ -224,7 +224,7 @@
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Arche géométrique dorée & Fleurs CSS/SVG */
+    /* Arche géométrique dorée */
     .card-border-frame {
       border: 1px solid var(--gold);
       padding: 30px 20px;
@@ -232,7 +232,6 @@
       border-radius: 6px;
     }
 
-    /* Coins de l'arche géométrique */
     .card-border-frame::before {
       content: '';
       position: absolute;
@@ -245,7 +244,7 @@
       pointer-events: none;
     }
 
-    /* Décorations Florales aux coins (SVG) */
+    /* Décorations Florales aux coins */
     .floral-decor {
       position: absolute;
       width: 130px;
@@ -407,8 +406,7 @@
 
     .actions {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      justify-content: center;
       margin-top: 25px;
     }
 
@@ -417,7 +415,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 14px 28px;
+      width: 100%;
       background: linear-gradient(135deg, var(--burgundy-main) 0%, var(--burgundy-dark) 100%);
       color: var(--gold-light);
       text-decoration: none;
@@ -490,7 +489,7 @@
       
       <div class="card-border-frame">
         
-        <!-- Illustration Florale en SVG Aquarelle -->
+        <!-- Illustration Florale -->
         <svg class="floral-decor floral-top-left" viewBox="0 0 100 100" fill="none">
           <path d="M10 10 Q 50 10 70 40 Q 30 50 10 10 Z" fill="#d8a7b1" opacity="0.6"/>
           <path d="M5 20 Q 40 30 50 70 Q 20 60 5 20 Z" fill="#7a1d28" opacity="0.4"/>
@@ -542,15 +541,11 @@
           </div>
         </div>
 
-        <!-- Boutons d'Action -->
+        <!-- Bouton GPS Unique -->
         <div class="actions">
           <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
             <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
             <span class="btn-ar">فتح موقع القاعة</span>
-          </a>
-          <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
-            <span class="btn-fr">💌 Confirmer ma présence (RSVP)</span>
-            <span class="btn-ar">تأكيد الحضور</span>
           </a>
         </div>
 
