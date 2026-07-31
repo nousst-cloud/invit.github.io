@@ -172,37 +172,36 @@
       .bismillah-text { top: -145px; font-size: 20px; }
     }
 
-    /* ---------------- SCEAU DE CIRE EXACT (NOUVEAU) ---------------- */
+    /* ---------------- SCEAU DE CIRE REEL EXATEMENT COMME LA PHOTO ---------------- */
     .wax-seal {
       position: absolute;
-      top: 95px;
+      top: 90px;
       left: 50%;
       transform: translateX(-50%);
-      width: 85px;
-      height: 85px;
+      width: 90px;
+      height: 90px;
       z-index: 5;
-      filter: drop-shadow(0 8px 15px rgba(0,0,0,0.5));
-      transition: transform 0.2s ease, filter 0.2s ease;
-      border-radius: 50%;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .wax-seal img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
+      border-radius: 50%;
     }
 
     .envelope-box:hover .wax-seal {
-      transform: translateX(-50%) scale(1.06);
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+      transform: translateX(-50%) scale(1.08);
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.7));
     }
 
     @media (min-width: 480px) {
       .wax-seal { 
-        top: 120px; 
-        width: 100px; 
-        height: 100px; 
+        top: 115px; 
+        width: 110px; 
+        height: 110px; 
       }
     }
 
@@ -477,40 +476,9 @@
       </div>
       <div class="env-flap-bottom"></div>
       
-      <!-- Sceau de cire exact (Image SVG haute qualité intégrée) -->
+      <!-- Sceau de cire exact issu directement de l'image -->
       <div class="wax-seal">
-        <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="goldGrad" cx="35%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#fff1b0"/>
-              <stop offset="25%" stop-color="#e6bf53"/>
-              <stop offset="65%" stop-color="#b8860b"/>
-              <stop offset="100%" stop-color="#664600"/>
-            </radialGradient>
-            <filter id="emboss" x="-10%" y="-10%" width="120%" height="120%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
-              <feOffset in="blur" dx="-2" dy="-2" result="offset"/>
-              <feSpecularLighting in="blur" surfaceScale="3" specularConstant="1" specularExponent="20" lighting-color="#ffffff" result="spec">
-                <feDistantLight azimuth="45" elevation="60"/>
-              </feSpecularLighting>
-              <feComposite in="spec" in2="SourceAlpha" operator="in" result="specOut"/>
-              <feMerge>
-                <feMergeNode in="SourceGraphic"/>
-                <feMergeNode in="specOut"/>
-              </feMerge>
-            </filter>
-          </defs>
-          <!-- Contour irrégulier de la cire -->
-          <path d="M100,12 C130,10 155,20 172,42 C190,65 195,95 188,125 C180,158 160,182 128,188 C98,194 65,188 42,170 C18,150 10,122 14,92 C18,60 40,25 72,15 Z" fill="url(#goldGrad)" filter="url(#emboss)"/>
-          <!-- Cercle intérieur gravé -->
-          <circle cx="100" cy="100" r="70" fill="none" stroke="#7a5500" stroke-width="3" opacity="0.6"/>
-          <circle cx="100" cy="100" r="66" fill="none" stroke="#ffe58f" stroke-width="1.5" opacity="0.8"/>
-          <!-- Initiales MD entrelacées style gravure -->
-          <text x="62" y="118" font-family="'Cinzel', 'Times New Roman', serif" font-size="58" font-weight="bold" fill="#543a00" opacity="0.85">M</text>
-          <text x="60" y="116" font-family="'Cinzel', 'Times New Roman', serif" font-size="58" font-weight="bold" fill="#fff3b0">M</text>
-          <text x="100" y="128" font-family="'Cinzel', 'Times New Roman', serif" font-size="64" font-weight="bold" fill="#543a00" opacity="0.85">D</text>
-          <text x="98" y="126" font-family="'Cinzel', 'Times New Roman', serif" font-size="64" font-weight="bold" fill="#fff3b0">D</text>
-        </svg>
+        <img src="Gemini_Generated_Image_g6wzpqg6wzpqg6wz.png" alt="Sceau de cire MD" onerror="this.src='https://i.ibb.co/3k5fH4k/seal-md.png';">
       </div>
     </div>
 
