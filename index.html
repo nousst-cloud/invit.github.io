@@ -38,9 +38,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      padding: 30px 15px;
+      justify-content: flex-start;
+      padding: 40px 15px;
     }
 
     .wrapper {
@@ -52,7 +51,7 @@
       align-items: center;
     }
 
-    /* Texte d'indication bilingue */
+    /* Indication bilingue */
     .click-hint {
       color: var(--burgundy-main);
       font-family: 'Cinzel', serif;
@@ -86,7 +85,7 @@
       width: 350px;
       height: 250px;
       perspective: 1200px;
-      transition: margin 0.8s ease-in-out;
+      transition: all 0.8s ease-in-out;
     }
 
     @media (min-width: 480px) {
@@ -96,7 +95,7 @@
       }
     }
 
-    /* Enveloppe 100% Bordeaux Réaliste */
+    /* Enveloppe Bordeaux */
     .envelope {
       position: relative;
       width: 100%;
@@ -106,10 +105,8 @@
       box-shadow: 
         0 25px 50px rgba(0, 0, 0, 0.4),
         inset 0 0 15px rgba(0,0,0,0.6);
-      overflow: hidden;
     }
 
-    /* Doublure intérieure bordeaux */
     .envelope::before {
       content: '';
       position: absolute;
@@ -119,9 +116,10 @@
       height: 100%;
       background: var(--burgundy-dark);
       z-index: 1;
+      border-radius: 6px;
     }
 
-    /* Côtés Gauche & Droite (Bordeaux plus sombre pour effet relief) */
+    /* Côtés de l'enveloppe */
     .side-flap-left {
       position: absolute;
       top: 0;
@@ -159,7 +157,7 @@
       }
     }
 
-    /* Rabat Supérieur Bordeaux */
+    /* Rabat Supérieur */
     .flap {
       position: absolute;
       top: 0;
@@ -183,7 +181,7 @@
       }
     }
 
-    /* Bismillah en Arabe sur le rabat */
+    /* Bismillah */
     .bismillah-envelope {
       position: absolute;
       top: -125px;
@@ -205,7 +203,7 @@
       }
     }
 
-    /* Poche du Bas de l'enveloppe */
+    /* Poche du bas */
     .pocket {
       position: absolute;
       bottom: 0;
@@ -216,6 +214,7 @@
       border-right: 175px solid transparent;
       border-bottom: 135px solid #3c090e;
       z-index: 3;
+      border-radius: 0 0 6px 6px;
     }
 
     @media (min-width: 480px) {
@@ -226,7 +225,7 @@
       }
     }
 
-    /* Sceau de Cire Réaliste M & D */
+    /* Sceau M & D */
     .wax-seal {
       position: absolute;
       top: 115px;
@@ -277,32 +276,29 @@
       text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.4);
     }
 
-    /* Lettre cachée */
+    /* Conteneur de la Lettre */
     .letter-wrapper {
       position: absolute;
-      top: 15px;
-      left: 4%;
-      width: 92%;
+      top: 10px;
+      left: 3%;
+      width: 94%;
       z-index: 2;
       opacity: 0;
       visibility: hidden;
       transform: translateY(20px);
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s, opacity 0.5s ease 0.4s, visibility 0.8s;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, opacity 0.5s ease 0.3s, visibility 0.8s;
     }
 
     .letter-folded {
       background: var(--paper);
-      border-radius: 4px;
+      border-radius: 6px;
       border: 1px solid var(--gold);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      padding: 30px 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      padding: 30px 18px;
       text-align: center;
-      transform-origin: top center;
-      transform: scaleY(0.3);
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s;
     }
 
-    /* Animation d'ouverture */
+    /* Animation d'ouverture complète */
     .envelope-container.open .flap {
       transform: rotateX(180deg);
       z-index: 1;
@@ -315,20 +311,29 @@
       pointer-events: none;
     }
 
+    /* La lettre sort complètement et passe au premier plan */
     .envelope-container.open .letter-wrapper {
       opacity: 1;
       visibility: visible;
-      transform: translateY(-220px);
-      z-index: 10;
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transform: translateY(0);
+      z-index: 100;
+      margin-bottom: 30px;
     }
 
-    .envelope-container.open .letter-folded {
-      transform: scaleY(1);
-    }
-
+    /* L'enveloppe se rétracte et s'affiche sous la lettre */
     .envelope-container.open {
-      margin-top: 230px;
-      margin-bottom: 60px;
+      height: auto;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .envelope-container.open .envelope {
+      transform: translateY(20px) scale(0.95);
+      opacity: 0.85;
     }
 
     /* Design Intérieur Carte */
@@ -511,6 +516,69 @@
     </div>
 
     <div class="envelope-container" id="envelopeContainer">
+      
+      <!-- Lettre qui se déploie entièrement -->
+      <div class="letter-wrapper">
+        <div class="letter-folded">
+          <div class="card-frame">
+            
+            <!-- Verset en Arabe -->
+            <div class="quran-verse">
+              « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
+            </div>
+
+            <div class="parents-header">
+              Ensemble avec leurs familles
+            </div>
+
+            <p style="font-size: 11px; color: #666; font-style: italic;">ont l'honneur de vous inviter au mariage de</p>
+
+            <div class="couple-names">
+              <div class="name-french">Meryem & Driss</div>
+              <div class="name-arabic">مريم و إدريس</div>
+            </div>
+
+            <div class="invitation-text">
+              Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
+            </div>
+
+            <div class="event-details-box">
+              <div class="date-highlight">VENDREDI 25 DÉCEMBRE 2026</div>
+              <div class="time-highlight">À PARTIR DE 20H00</div>
+              
+              <div class="venue-title">SALLE DES FÊTES ECLAIRE WEDDING & EVENTS</div>
+              <div class="venue-address">Salé, Maroc</div>
+            </div>
+
+            <!-- Carte Google Maps -->
+            <div class="map-section">
+              <h4>📍 Localisation / موقع القاعة</h4>
+              <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+
+            <!-- Boutons Traduits -->
+            <div class="actions">
+              <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
+                <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
+                <span class="btn-ar">فتح موقع القاعة</span>
+              </a>
+              <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
+                <span class="btn-fr">💌 Confirmer ma présence (RSVP)</span>
+                <span class="btn-ar">تأكيد الحضور</span>
+              </a>
+            </div>
+
+            <div class="footer-note">
+              Au plaisir de vous compter parmi nous ✨
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Enveloppe -->
       <div class="envelope">
         
         <!-- Côtés bordeaux -->
@@ -529,68 +597,8 @@
 
         <div class="pocket"></div>
 
-        <!-- Lettre masquée -->
-        <div class="letter-wrapper">
-          <div class="letter-folded">
-            <div class="card-frame">
-              
-              <!-- Verset en Arabe -->
-              <div class="quran-verse">
-                « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
-              </div>
-
-              <div class="parents-header">
-                Ensemble avec leurs familles
-              </div>
-
-              <p style="font-size: 11px; color: #666; font-style: italic;">ont l'honneur de vous inviter au mariage de</p>
-
-              <div class="couple-names">
-                <div class="name-french">Meryem & Driss</div>
-                <div class="name-arabic">مريم و إدريس</div>
-              </div>
-
-              <div class="invitation-text">
-                Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
-              </div>
-
-              <div class="event-details-box">
-                <div class="date-highlight">VENDREDI 25 DÉCEMBRE 2026</div>
-                <div class="time-highlight">À PARTIR DE 20H00</div>
-                
-                <div class="venue-title">SALLE DES FÊTES ECLAIRE WEDDING & EVENTS</div>
-                <div class="venue-address">Salé, Maroc</div>
-              </div>
-
-              <!-- Carte Google Maps -->
-              <div class="map-section">
-                <h4>📍 Localisation / موقع القاعة</h4>
-                <div class="map-container">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                </div>
-              </div>
-
-              <!-- Boutons Traduits -->
-              <div class="actions">
-                <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
-                  <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
-                  <span class="btn-ar">فتح موقع القاعة</span>
-                </a>
-                <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
-                  <span class="btn-fr">💌 Confirmer ma présence (RSVP)</span>
-                  <span class="btn-ar">تأكيد الحضور</span>
-                </a>
-              </div>
-
-              <div class="footer-note">
-                Au plaisir de vous compter parmi nous ✨
-              </div>
-
-            </div>
-          </div>
-        </div>
-
       </div>
+
     </div>
   </div>
 
