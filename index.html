@@ -4,87 +4,494 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mariage Meryem & Driss</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      background-color: #2b080c;
-      color: #fdfbf7;
-      font-family: 'Georgia', serif;
+    :root {
+      --bg-dark: #1a0306;
+      --burgundy: #4a0e17;
+      --burgundy-light: #6b1824;
+      --burgundy-dark: #2d070d;
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #aa8625;
+      --cream-card: #f9f4ea;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #2b080c 0%, var(--bg-dark) 100%);
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
+      overflow-x: hidden;
+      padding: 20px 10px;
     }
-    .card {
-      background: #fdfbf7;
-      color: #4a0e17;
-      max-width: 450px;
+
+    /* Arrière-plan étoiles/étincelles */
+    .stars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      border-radius: 12px;
-      padding: 30px 20px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #d4af37, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #d4af37, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #f3e5ab, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      opacity: 0.3;
+      animation: sparkle 20s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-200px); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 550px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .click-hint {
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      text-transform: uppercase;
       text-align: center;
-      border: 2px solid #d4af37;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      animation: pulse 2s infinite;
+      cursor: pointer;
     }
-    .basmala {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #8b0000;
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      color: #8b0000;
-      margin: 10px 0;
+
+    /* Conteneur Enveloppe */
+    .envelope-container {
+      position: relative;
+      width: 340px;
+      height: 240px;
+      cursor: pointer;
+      perspective: 1000px;
+      transition: margin 0.8s ease;
     }
-    .arabic-names {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #d4af37;
+
+    @media (min-width: 480px) {
+      .envelope-container {
+        width: 440px;
+        height: 300px;
+      }
     }
-    .details {
-      border-top: 1px solid #d4af37;
-      border-bottom: 1px solid #d4af37;
-      padding: 15px 0;
-      margin: 20px 0;
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: var(--burgundy-dark);
+      border-radius: 8px;
+      box-shadow: 0 15px 35px var(--shadow), 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 170px solid transparent;
+      border-right: 170px solid transparent;
+      border-top: 130px solid var(--burgundy);
+      transform-origin: top;
+      transition: transform 0.8s ease 0.4s, z-index 0.2s ease 0.4s;
+      z-index: 5;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+
+    @media (min-width: 480px) {
+      .flap {
+        border-left-width: 220px;
+        border-right-width: 220px;
+        border-top-width: 160px;
+      }
+    }
+
+    .pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 170px solid var(--burgundy-light);
+      border-right: 170px solid var(--burgundy-light);
+      border-bottom: 120px solid var(--burgundy);
+      border-radius: 0 0 8px 8px;
+      z-index: 3;
+    }
+
+    @media (min-width: 480px) {
+      .pocket {
+        border-left-width: 220px;
+        border-right-width: 220px;
+        border-bottom-width: 150px;
+      }
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle, #f3e5ab 0%, #d4af37 50%, #aa8625 100%);
+      border-radius: 50%;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 0 5px rgba(255,255,255,0.6);
+      transition: opacity 0.4s ease 0.2s, transform 0.4s ease;
+      border: 2px solid var(--gold-light);
+    }
+
+    @media (min-width: 480px) {
+      .wax-seal {
+        top: 135px;
+        width: 65px;
+        height: 65px;
+      }
+    }
+
+    .wax-seal span {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--burgundy-dark);
       font-size: 16px;
-      line-height: 1.6;
+      letter-spacing: 1px;
     }
-    .btn {
-      display: block;
-      width: 80%;
-      margin: 10px auto;
+
+    /* Carte d'invitation */
+    .invitation-card {
+      position: absolute;
+      top: 15px;
+      left: 5%;
+      width: 90%;
+      background: var(--cream-card);
+      background-image: radial-gradient(var(--gold-light) 0.5px, transparent 0.5px);
+      background-size: 15px 15px;
+      border-radius: 6px;
+      padding: 25px 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 2px solid var(--gold);
+      box-sizing: border-box;
+      z-index: 2;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, z-index 0.1s ease 1s;
+      text-align: center;
+      opacity: 0.95;
+    }
+
+    /* Animation Ouverture */
+    .envelope-container.open .flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+      transition: transform 0.6s ease, z-index 0.1s ease 0.3s;
+    }
+
+    .envelope-container.open .wax-seal {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.5);
+      pointer-events: none;
+    }
+
+    .envelope-container.open .invitation-card {
+      transform: translateY(-220px);
+      z-index: 10;
+      opacity: 1;
+    }
+
+    .envelope-container.open {
+      margin-top: 220px;
+    }
+
+    .card-border-frame {
+      border: 1px solid var(--gold-dark);
+      padding: 15px 10px;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    .quran-verse {
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: var(--burgundy);
+      line-height: 1.8;
+      margin-bottom: 8px;
+      direction: rtl;
+      font-weight: bold;
+    }
+
+    .quran-translation {
+      font-size: 11px;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .parents-header {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 10px;
+    }
+
+    .couple-names {
+      margin: 15px 0;
+    }
+
+    .name-french {
+      font-family: 'Alex Brush', cursive;
+      font-size: 42px;
+      color: var(--burgundy);
+      line-height: 1.2;
+    }
+
+    .name-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 26px;
+      color: var(--gold-dark);
+      margin-top: 5px;
+    }
+
+    .invitation-text {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.5;
+      margin: 15px 0;
+    }
+
+    .event-details-box {
+      background-color: rgba(212, 175, 55, 0.08);
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
       padding: 12px;
-      background-color: #8b0000;
-      color: #fdfbf7;
+      margin: 15px 0;
+    }
+
+    .date-highlight {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+
+    .time-highlight {
+      font-size: 12px;
+      color: var(--gold-dark);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .venue-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--burgundy);
+      margin-top: 10px;
+    }
+
+    .venue-address {
+      font-size: 11px;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    .map-section {
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gold);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .map-section h4 {
+      font-family: 'Cinzel', serif;
+      background: var(--burgundy);
+      color: var(--gold-light);
+      padding: 6px;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .map-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+      color: var(--gold-light);
       text-decoration: none;
       border-radius: 25px;
-      font-weight: bold;
-      border: 1px solid #d4af37;
-      transition: 0.3s;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
+
     .btn:hover {
-      background-color: #d4af37;
-      color: #4a0e17;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+      color: var(--burgundy-dark);
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #777;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="basmala">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-  <p>Ensemble avec nos familles, nous avons la joie de vous faire part de notre mariage</p>
-  
-  <h1>Meryem & Driss</h1>
-  <div class="arabic-names">مريم و إدريس</div>
+  <div class="stars-bg"></div>
 
-  <div class="details">
-    <p><strong>Vendredi 25 Décembre 2026</strong><br>À partir de 20h00</p>
-    <p><strong>Lieu :</strong><br>Salle des fêtes Eclaire Wedding Events<br>Salé, Maroc</p>
+  <div class="wrapper">
+    <div class="click-hint" id="clickHint">✨ Cliquez sur l'enveloppe pour ouvrir ✨</div>
+
+    <div class="envelope-container" id="envelopeContainer" onclick="toggleEnvelope()">
+      <div class="envelope">
+        <div class="flap"></div>
+        <div class="wax-seal">
+          <span>M&D</span>
+        </div>
+        <div class="pocket"></div>
+
+        <div class="invitation-card" onclick="event.stopPropagation();">
+          <div class="card-border-frame">
+            
+            <div class="quran-verse">
+              « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
+            </div>
+            <div class="quran-translation">
+              "Et parmi Ses signes Il a créé de vous, pour vous, des épouses afin que vous viviez en tranquillité auprès d'elles et Il a mis entre vous de l'affection et de la bonté."<br><em>(Sourate Ar-Rum - Verset 21)</em>
+            </div>
+
+            <div class="parents-header">
+              Ensemble avec leurs familles
+            </div>
+
+            <p style="font-size: 11px; color: #666; font-style: italic;">ont l'honneur de vous inviter au mariage de</p>
+
+            <div class="couple-names">
+              <div class="name-french">Meryem & Driss</div>
+              <div class="name-arabic">مريم و إدريس</div>
+            </div>
+
+            <div class="invitation-text">
+              Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
+            </div>
+
+            <div class="event-details-box">
+              <div class="date-highlight">VENDREDI 25 DÉCEMBRE 2026</div>
+              <div class="time-highlight">À PARTIR DE 20H00</div>
+              
+              <div class="venue-title">SALLE DES FÊTES ECLAIRE WEDDING & EVENTS</div>
+              <div class="venue-address">Salé, Maroc</div>
+            </div>
+
+            <!-- Carte Google Maps Intégrée -->
+            <div class="map-section">
+              <h4>📍 Localisation de la salle</h4>
+              <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+
+            <div class="actions">
+              <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
+                🗺️ Ouvrir l'itinéraire GPS
+              </a>
+              <a href="https://wa.me/?text=Bonjour,%20je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss%20le%2025%20Décembre%202026." target="_blank" class="btn">
+                💌 Confirmer ma présence (RSVP)
+              </a>
+            </div>
+
+            <div class="footer-note">
+              Au plaisir de vous compter parmi nous ✨
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <a href="https://maps.google.com" target="_blank" class="btn">📍 Plan d'accès Google Maps</a>
-  <a href="https://wa.me/?text=Je%20confirme%20ma%20présence%20au%20mariage%20de%20Meryem%20et%20Driss" target="_blank" class="btn">💌 Confirmer ma présence (RSVP)</a>
-</div>
-
+  <script>
+    function toggleEnvelope() {
+      const container = document.getElementById('envelopeContainer');
+      const hint = document.getElementById('clickHint');
+      
+      container.classList.toggle('open');
+      
+      if (container.classList.contains('open')) {
+        hint.innerHTML = "✨ Bienvenue au Mariage de Meryem & Driss ✨";
+      } else {
+        hint.innerHTML = "✨ Cliquez sur l'enveloppe pour ouvrir ✨";
+      }
+    }
+  </script>
 </body>
 </html>
