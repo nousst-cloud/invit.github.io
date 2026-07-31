@@ -44,184 +44,24 @@
     .wrapper {
       position: relative;
       width: 100%;
-      max-width: 620px;
+      max-width: 580px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Indication bilingue haut */
-    .click-hint {
-      color: var(--burgundy-main);
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      text-align: center;
-      animation: pulse 2s infinite;
-      font-weight: 600;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: opacity 0.5s ease;
-    }
-
-    .click-hint .hint-ar {
-      font-family: 'Amiri', serif;
-      font-size: 19px;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
-    }
-
-    /* ---------------- ENVELOPPE ---------------- */
-    .envelope-box {
-      position: relative;
-      width: 350px;
-      height: 250px;
-      background: var(--burgundy-dark);
-      border-radius: 8px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      cursor: pointer;
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @media (min-width: 480px) {
-      .envelope-box {
-        width: 460px;
-        height: 310px;
-      }
-    }
-
-    /* Rabats enveloppe */
-    .env-flap-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 175px solid transparent;
-      border-right: 175px solid transparent;
-      border-top: 135px solid var(--burgundy-main);
-      z-index: 4;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-      transition: transform 0.6s ease;
-      transform-origin: top;
-    }
-
-    .env-flap-left {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 175px solid #450b12;
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid transparent;
-      z-index: 2;
-    }
-
-    .env-flap-right {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-right: 175px solid #450b12;
-      border-top: 125px solid transparent;
-      border-bottom: 125px solid transparent;
-      z-index: 2;
-    }
-
-    .env-flap-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-left: 175px solid transparent;
-      border-right: 175px solid transparent;
-      border-bottom: 130px solid #36070c;
-      z-index: 3;
-    }
-
-    @media (min-width: 480px) {
-      .env-flap-top { border-left-width: 230px; border-right-width: 230px; border-top-width: 170px; }
-      .env-flap-left { border-left-width: 230px; border-top-width: 155px; border-bottom-width: 155px; }
-      .env-flap-right { border-right-width: 230px; border-top-width: 155px; border-bottom-width: 155px; }
-      .env-flap-bottom { border-left-width: 230px; border-right-width: 230px; border-bottom-width: 165px; }
-    }
-
-    .bismillah-text {
-      position: absolute;
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Amiri', serif;
-      font-size: 18px;
-      color: var(--gold-light);
-      white-space: nowrap;
-    }
-
-    @media (min-width: 480px) {
-      .bismillah-text { top: -145px; font-size: 20px; }
-    }
-
-    /* ---------------- SCEAU DE CIRE REEL EXATEMENT COMME LA PHOTO ---------------- */
-    .wax-seal {
-      position: absolute;
-      top: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90px;
-      height: 90px;
-      z-index: 5;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .wax-seal img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    .envelope-box:hover .wax-seal {
-      transform: translateX(-50%) scale(1.08);
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.7));
-    }
-
-    @media (min-width: 480px) {
-      .wax-seal { 
-        top: 115px; 
-        width: 110px; 
-        height: 110px; 
-      }
-    }
-
     /* ---------------- CARTE D'INVITATION ---------------- */
     .invitation-card {
-      display: none;
       width: 100%;
-      max-width: 580px;
       background: #ffffff;
       border-radius: 12px;
       padding: 35px 25px;
       box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
       position: relative;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Arche géométrique dorée */
+    /* Cadre doré */
     .card-border-frame {
       border: 1px solid var(--gold);
       padding: 30px 20px;
@@ -259,22 +99,6 @@
       bottom: -10px;
       right: -10px;
       transform: rotate(180deg);
-    }
-
-    /* Modificateurs d'ouverture */
-    .wrapper.open .envelope-box {
-      opacity: 0;
-      transform: scale(0.8);
-      pointer-events: none;
-      height: 0;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .wrapper.open .invitation-card {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* Contenu de la Carte */
@@ -459,31 +283,10 @@
 </head>
 <body>
 
-  <div class="wrapper" id="mainWrapper">
+  <div class="wrapper">
     
-    <!-- En-tête / Indication -->
-    <div class="click-hint" id="clickHint">
-      <span class="hint-ar">✨ افتح هنا ✨</span>
-      <span>Cliquez sur le sceau pour ouvrir</span>
-    </div>
-
-    <!-- 1. L'ENVELOPPE INITIALE -->
-    <div class="envelope-box" onclick="openEnvelope()">
-      <div class="env-flap-left"></div>
-      <div class="env-flap-right"></div>
-      <div class="env-flap-top">
-        <div class="bismillah-text">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-      </div>
-      <div class="env-flap-bottom"></div>
-      
-      <!-- Sceau de cire exact issu directement de l'image -->
-      <div class="wax-seal">
-        <img src="Gemini_Generated_Image_g6wzpqg6wzpqg6wz.png" alt="Sceau de cire MD" onerror="this.src='https://i.ibb.co/3k5fH4k/seal-md.png';">
-      </div>
-    </div>
-
-    <!-- 2. LA CARTE D'INVITATION SEULE ET COMPLÈTE -->
-    <div class="invitation-card" id="invitationCard">
+    <!-- LA CARTE D'INVITATION SEULE -->
+    <div class="invitation-card">
       
       <div class="card-border-frame">
         
@@ -539,7 +342,7 @@
           </div>
         </div>
 
-        <!-- Bouton GPS Unique -->
+        <!-- Bouton GPS -->
         <div class="actions">
           <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
             <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
@@ -556,14 +359,5 @@
 
   </div>
 
-  <script>
-    function openEnvelope() {
-      const wrapper = document.getElementById('mainWrapper');
-      const hint = document.getElementById('clickHint');
-      
-      wrapper.classList.add('open');
-      hint.innerHTML = "<span class='hint-ar'>مرحبا بكم في زفاف مريم وإدريس</span><span>✨ Bienvenue au Mariage de Meryem & Driss ✨</span>";
-    }
-  </script>
 </body>
 </html>
