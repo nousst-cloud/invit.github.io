@@ -8,14 +8,12 @@
   <!-- Fonts Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-cream: #f6f3ee;
       --gold-main: #c6a052;
       --gold-dark: #9e7a32;
-      --gold-light: #e8d5ad;
       --text-dark: #2b2b2b;
       --text-muted: #555555;
       --burgundy: #58111a;
@@ -28,147 +26,40 @@
     }
 
     body {
-      background-color: var(--bg-cream);
-      background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #ece5d8 100%);
+      background-color: #f6f3ee;
       font-family: 'Montserrat', sans-serif;
       color: var(--text-dark);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 20px 10px;
-      overflow-x: hidden;
-    }
-
-    .main-container {
-      position: relative;
-      width: 100%;
-      max-width: 580px;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-    }
-
-    /* ---------------- INDICATION ---------------- */
-    .click-hint {
-      color: var(--gold-dark);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
-      letter-spacing: 2px;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-      text-align: center;
-      animation: pulse 2.2s infinite;
-      font-weight: 600;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: opacity 0.5s ease;
-    }
-
-    .click-hint .hint-ar {
-      font-family: 'Amiri', serif;
-      font-size: 24px;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.75; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
-    }
-
-    /* ---------------- ENVELOPPE INTERACTIVE ---------------- */
-    .envelope-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 480px;
-      height: 330px;
-      cursor: pointer;
-      perspective: 1000px;
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .envelope-card {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 12px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-      background-image: url('IMG_5975.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-
-    /* Sceau de Cire */
-    .wax-seal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 95px;
-      height: 95px;
-      z-index: 10;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .wax-seal img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      border-radius: 50%;
-    }
-
-    .envelope-wrapper:hover .wax-seal {
-      transform: translate(-50%, -50%) scale(1.08);
-    }
-
-    /* Ouverture au clic */
-    .main-container.open .envelope-wrapper {
-      opacity: 0;
-      transform: translateY(-80px) scale(0.85);
-      pointer-events: none;
-      height: 0;
-      margin: 0;
+      padding: 20px 10px;
     }
 
     /* ---------------- CARTE D'INVITATION ---------------- */
     .invitation-card {
-      display: none;
       width: 100%;
+      max-width: 540px;
       background-image: url('Gemini_Generated_Image_3dcd6i3dcd6i3dcd.png');
       background-size: cover;
       background-position: center;
       border-radius: 16px;
-      padding: 75px 50px 50px 50px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      padding: 100px 30px 40px 30px; /* Grand espace en haut pour éviter les fleurs */
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       position: relative;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .main-container.open .invitation-card {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Verset Coranique */
+    /* Verset Coranique : RESSERRÉ ET CENTRÉ DANS LA ZONE BLANCHE */
     .quran-verse {
       font-family: 'Amiri', serif;
-      font-size: 16px;
+      font-size: 14px;
       color: var(--burgundy);
       line-height: 1.8;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 30px auto;
       direction: rtl;
       text-align: center;
       font-weight: 700;
-      max-width: 82%;
+      width: 50%; /* Bloque la largeur pour ne pas toucher les bords */
     }
 
     .parents-text {
@@ -188,45 +79,38 @@
       color: var(--text-muted);
       text-transform: uppercase;
       text-align: center;
-      margin: 6px 0 20px 0;
+      margin: 6px 0 25px 0;
     }
 
-    /* Noms des Mariés */
+    /* Noms des Mariés : UNIQUEMENT LES MAJUSCULES + ARABE */
     .couple-names {
       text-align: center;
-      margin: 15px 0 20px 0;
+      margin: 20px 0;
     }
 
     .name-main {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 600;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       color: var(--text-dark);
       text-transform: uppercase;
       line-height: 1.1;
     }
 
-    .name-script {
-      font-family: 'Great Vibes', cursive;
-      font-size: 34px;
-      color: var(--gold-main);
-      margin: -6px 0 2px 0;
-    }
-
     .and-divider {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 18px;
+      font-size: 20px;
       color: var(--gold-dark);
-      margin: 2px 0;
+      margin: 10px 0;
     }
 
     .name-arabic {
       font-family: 'Amiri', serif;
-      font-size: 26px;
+      font-size: 28px;
       color: var(--gold-dark);
-      margin-top: 15px;
+      margin-top: 20px;
       font-weight: 700;
     }
 
@@ -236,7 +120,7 @@
       color: var(--text-muted);
       line-height: 1.6;
       text-align: center;
-      margin: 18px 5px;
+      margin: 25px 15px;
       font-style: italic;
     }
 
@@ -309,13 +193,12 @@
       margin-top: 2px;
     }
 
-    /* Section Carte Google Maps */
+    /* Maps & Actions */
     .map-section {
       margin-top: 20px;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(198, 160, 82, 0.4);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
 
     .map-header {
@@ -331,7 +214,7 @@
 
     .map-container {
       width: 100%;
-      height: 200px;
+      height: 180px;
     }
 
     .map-container iframe {
@@ -340,7 +223,6 @@
       border: 0;
     }
 
-    /* Bouton GPS */
     .actions {
       display: flex;
       justify-content: center;
@@ -359,7 +241,6 @@
       text-decoration: none;
       border-radius: 30px;
       box-shadow: 0 5px 18px rgba(198, 160, 82, 0.35);
-      transition: all 0.3s ease;
     }
 
     .btn-fr {
@@ -376,33 +257,24 @@
       margin-top: 1px;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(198, 160, 82, 0.5);
-      background: linear-gradient(135deg, var(--text-dark) 0%, #444444 100%);
-    }
-
     .footer-note {
       text-align: center;
       margin-top: 20px;
-      font-family: 'Great Vibes', cursive;
-      font-size: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
       color: var(--gold-dark);
     }
 
-    /* Responsivité Mobile */
     @media (max-width: 480px) {
       .invitation-card {
-        padding: 60px 25px 40px 25px;
+        padding: 85px 15px 30px 15px;
       }
       .quran-verse {
-        max-width: 95%;
-        font-size: 15px;
+        width: 75%;
+        font-size: 13px;
       }
       .name-main {
-        font-size: 30px;
-      }
-      .name-script {
         font-size: 28px;
       }
     }
@@ -410,104 +282,70 @@
 </head>
 <body>
 
-  <div class="main-container" id="mainContainer">
+  <!-- CARTE D'INVITATION SEULE -->
+  <div class="invitation-card">
     
-    <!-- Indication Haut -->
-    <div class="click-hint" id="clickHint">
-      <span class="hint-ar">✨ افتح هنا ✨</span>
-      <span>Cliquez sur le sceau pour ouvrir</span>
+    <!-- Verset Coranique bien resserré -->
+    <div class="quran-verse">
+      « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
     </div>
 
-    <!-- 1. ENVELOPPE INTERACTIVE -->
-    <div class="envelope-wrapper" onclick="openInvitation()">
-      <div class="envelope-card">
-        <!-- Sceau de cire -->
-        <div class="wax-seal">
-          <img src="Gemini_Generated_Image_g6wzpqg6wzpqg6wz.jpg" alt="Sceau Meryem & Driss">
-        </div>
-      </div>
+    <div class="parents-text">Ensemble avec leurs familles</div>
+    <div class="invite-sentence">ont l'honneur de vous inviter au mariage de</div>
+
+    <!-- Noms des Mariés (Nettoyés) -->
+    <div class="couple-names">
+      <div class="name-main">MERYEM</div>
+      <div class="and-divider">— & —</div>
+      <div class="name-main">DRISS</div>
+
+      <div class="name-arabic">مريم و إدريس</div>
     </div>
 
-    <!-- 2. CARTE D'INVITATION -->
-    <div class="invitation-card">
-      
-      <!-- Verset Coranique -->
-      <div class="quran-verse">
-        « وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً »
-      </div>
+    <div class="invitation-text">
+      Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
+    </div>
 
-      <div class="parents-text">Ensemble avec leurs familles</div>
-      <div class="invite-sentence">ont l'honneur de vous inviter au mariage de</div>
-
-      <!-- Noms Français puis Arabe juste en dessous -->
-      <div class="couple-names">
-        <div class="name-main">MERYEM</div>
-        <div class="name-script">Meryem</div>
-        <div class="and-divider">— & —</div>
-        <div class="name-main">DRISS</div>
-        <div class="name-script">Driss</div>
-
-        <div class="name-arabic">مريم و إدريس</div>
-      </div>
-
-      <div class="invitation-text">
-        Seront très honorés de votre présence pour célébrer leur union et partager ce moment d'allégresse.
-      </div>
-
-      <!-- Date avec 2026 placé sous le 25 -->
-      <div class="event-section">
-        <div class="date-row">
-          <span class="date-side">VENDREDI</span>
-          
-          <div class="date-center-box">
-            <span class="date-number">25</span>
-            <span class="date-year">2026</span>
-          </div>
-
-          <span class="date-side">DÉCEMBRE</span>
-        </div>
+    <!-- Date -->
+    <div class="event-section">
+      <div class="date-row">
+        <span class="date-side">VENDREDI</span>
         
-        <div class="date-side" style="color: var(--gold-dark); margin-top: 10px;">À PARTIR DE 20H00</div>
-
-        <div class="venue-name">SALLE DES FÊTES ECLAIRE WEDDINGS & EVENTS</div>
-        <div class="venue-city">Salé, Maroc</div>
-      </div>
-
-      <!-- Carte Google Maps -->
-      <div class="map-section">
-        <div class="map-header">📍 Localisation / موقع القاعة</div>
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
+        <div class="date-center-box">
+          <span class="date-number">25</span>
+          <span class="date-year">2026</span>
         </div>
-      </div>
 
-      <!-- Bouton GPS -->
-      <div class="actions">
-        <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
-          <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
-          <span class="btn-ar">فتح موقع القاعة</span>
-        </a>
+        <span class="date-side">DÉCEMBRE</span>
       </div>
+      
+      <div class="date-side" style="color: var(--gold-dark); margin-top: 10px;">À PARTIR DE 20H00</div>
 
-      <div class="footer-note">
-        Au plaisir de vous compter parmi nous ✨
+      <div class="venue-name">SALLE DES FÊTES ECLAIRE WEDDINGS & EVENTS</div>
+      <div class="venue-city">Salé, Maroc</div>
+    </div>
+
+    <!-- Carte Google Maps -->
+    <div class="map-section">
+      <div class="map-header">📍 Localisation / موقع القاعة</div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.2773691539605!2d-6.7758833894603185!3d34.036755473050924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76a3e56f124c7%3A0x3a153214daf255a4!2zw4lDTEFJUkUgV0VERElOR1MgJiBFVkVOVFMg8J-Ohw!5e0!3m2!1sfr!2sfr!4v1785496298399!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy"></iframe>
       </div>
+    </div>
 
+    <!-- Bouton GPS -->
+    <div class="actions">
+      <a href="https://maps.google.com/?q=ÉCLAIRE+WEDDINGS+%26+EVENTS+Salé" target="_blank" class="btn">
+        <span class="btn-fr">🗺️ Ouvrir l'itinéraire GPS</span>
+        <span class="btn-ar">فتح موقع القاعة</span>
+      </a>
+    </div>
+
+    <div class="footer-note">
+      Au plaisir de vous compter parmi nous ✨
     </div>
 
   </div>
 
-  <script>
-    function openInvitation() {
-      const container = document.getElementById('mainContainer');
-      const hint = document.getElementById('clickHint');
-      
-      container.classList.add('open');
-      hint.style.opacity = '0';
-      setTimeout(() => {
-        hint.style.display = 'none';
-      }, 500);
-    }
-  </script>
 </body>
 </html>
